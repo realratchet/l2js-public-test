@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lineage II - JS C4 Public Test</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600&family=Noto+Serif+KR:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" as="image" href="art/landscape-concept.jpg">
+</head>
+
+<body>
+    <audio class="background-music" src="music/outro.ogg" loop preload="auto"></audio>
+    <div class="backdrop">
+        <div class="slide" style="background-image: url('art/landscape-concept.jpg')"></div>
+        <div class="slide" style="background-image: url('art/antharas-concept.jpg')"></div>
+        <div class="slide" style="background-image: url('art/landscape-2.jpg')"></div>
+    </div>
+    <canvas class="embers"></canvas>
+    <div class="vignette"></div>
+
+    <button type="button" class="music-toggle reveal" aria-label="Play background music" aria-pressed="false" title="Play background music">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="music-muted" d="m3 3 18 18"/></svg>
+        <span>Music</span>
+    </button>
+
+    <a class="repo reveal" href="https://github.com/realratchet/Lineage2JS" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>Lineage2JS</span>
+    </a>
+
+    <main class="stage">
+        <img class="logo reveal" src="logo.png" width="1000" height="800" alt="Lineage II">
+        <h1 class="title reveal">C4 Public Test</h1>
+
+        <section class="panel reveal" aria-live="polite">
+            <div class="panel-heading">The gates open in</div>
+            <div class="timer">
+                <div class="unit"><span class="value" data-unit="days">00</span><span class="label">Days</span></div>
+                <div class="sep">:</div>
+                <div class="unit"><span class="value" data-unit="hours">00</span><span class="label">Hours</span></div>
+                <div class="sep">:</div>
+                <div class="unit"><span class="value" data-unit="minutes">00</span><span class="label">Minutes</span></div>
+                <div class="sep">:</div>
+                <div class="unit"><span class="value" data-unit="seconds">00</span><span class="label">Seconds</span></div>
+            </div>
+            <div class="date">
+                <span class="date-server"></span>
+                <span class="date-local"></span>
+            </div>
+        </section>
+
+        <div class="actions reveal">
+            <a class="button" href="magnet:?xt=urn:btih:7065390fefaee53bec4fd6fe71a98d15f7e6ddf5&amp;dn=Lineage%20II%20Chronicle%204%20-%20Scions%20of%20Destiny&amp;tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&amp;tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&amp;tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3v9a6 6 0 0 0 12 0V3h-4v9a2 2 0 0 1-4 0V3Z"/><path d="M6 7h4m4 0h4"/></svg>
+                Client download
+            </a>
+            <a class="button" href="game/" data-action="load">Load Client Assets</a>
+        </div>
+
+        <p class="desktop-only reveal">The public test is available on desktop only.<br>Visit this page from a computer to download the client and load its assets.</p>
+
+        <a class="lore-hint reveal" href="#lore">The Legend<span aria-hidden="true"></span></a>
+    </main>
+
+    <div class="chronicle">
+        <aside class="sidebar">
+            <img class="sidebar-logo" src="logo.png" width="1000" height="800" alt="">
+            <div class="mini-timer">
+                <div class="mini-unit"><span class="value" data-unit="days">00</span><span class="label">Days</span></div>
+                <div class="mini-unit"><span class="value" data-unit="hours">00</span><span class="label">Hrs</span></div>
+                <div class="mini-unit"><span class="value" data-unit="minutes">00</span><span class="label">Min</span></div>
+                <div class="mini-unit"><span class="value" data-unit="seconds">00</span><span class="label">Sec</span></div>
+            </div>
+            <div class="mini-date date-server"></div>
+            <div class="current-chapter"></div>
+            <nav class="chapters" aria-label="Chapters"></nav>
+            <a class="sidebar-repo" href="https://github.com/realratchet/Lineage2JS" target="_blank" rel="noopener" aria-label="Lineage2JS on GitHub">
+                <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                <span>Lineage2JS on GitHub</span>
+            </a>
+        </aside>
+
+        <section class="lore" id="lore">
+            <h2 class="lore-heading">The Legend of Lineage II</h2>
+            <div class="lore-text"></div>
+        </section>
+    </div>
+
+    <footer class="footer">Lineage II is a trademark of NCSOFT Corporation. This is a non-commercial fan project and is not affiliated with NCSOFT.</footer>
+
+    <script src="config.js"></script>
+    <script src="lore.js"></script>
+    <script src="landing.js"></script>
+</body>
+
+</html>
