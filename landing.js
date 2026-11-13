@@ -6,6 +6,7 @@
 
     const music = document.querySelector(".background-music");
     const musicButton = document.querySelector(".music-toggle");
+    const elTrailer = document.querySelector(".trailer");
 
     music.volume = 0.1;
 
@@ -34,7 +35,7 @@
     }
 
     function unlockMusic(event) {
-        if (!musicButton.contains(event.target)) void playMusic();
+        if (!musicButton.contains(event.target) && !elTrailer.contains(event.target)) void playMusic();
     }
 
     musicButton.addEventListener("click", () => {
@@ -43,6 +44,18 @@
             removeMusicUnlock();
             music.pause();
         }
+    });
+    elTrailer.addEventListener("click", event => {
+        const frame = document.createElement("iframe");
+
+        event.preventDefault();
+        removeMusicUnlock();
+        music.pause();
+        frame.className = elTrailer.className;
+        frame.src = `https://www.youtube-nocookie.com/embed/${new URL(elTrailer.href).searchParams.get("v")}?autoplay=1&rel=0`;
+        frame.title = "Lineage2JS public test trailer";
+        frame.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        elTrailer.replaceWith(frame);
     });
     music.addEventListener("play", updateMusicButton);
     music.addEventListener("pause", updateMusicButton);
@@ -97,55 +110,17 @@
     const elLore = document.querySelector(".lore-text");
     const elChapters = document.querySelector(".chapters");
     const elCurrent = document.querySelector(".current-chapter");
-    const links = [];
-
-    window.L2JS_LORE.forEach((section, index) => {
-        const id = `chapter-${index}`;
-        const title = document.createElement("h3");
-        const [label, name] = section.title.includes(": ") ? section.title.split(": ") : ["", section.title];
-
-        title.id = id;
-        title.textContent = section.title;
-        elLore.append(title);
-
-        if (section.image) {
-            const img = document.createElement("img");
-
-            img.src = section.image;
-            img.alt = "";
-            img.loading = "lazy";
-            img.className = `lore-art lore-art-${section.align}`;
-            elLore.append(img);
-        }
-
-        elLore.append(...section.paragraphs.map(text => {
-            const p = document.createElement("p");
-
-            p.textContent = text;
-
-            return p;
-        }));
-
-        const link = document.createElement("a");
-
-        link.href = `#${id}`;
-        link.innerHTML = `<span class="chapter-label"></span><span class="chapter-name"></span>`;
-        link.firstChild.textContent = label;
-        link.lastChild.textContent = name;
-        elChapters.append(link);
-        links.push(link);
-    });
+    const headings = [...elLore.querySelectorAll("h3")];
+    const links = [...elChapters.querySelectorAll("a")];
 
     function setActiveChapter(index) {
         links.forEach((link, i) => link.classList.toggle("active", i === index));
-        elCurrent.textContent = window.L2JS_LORE[index].title;
+        elCurrent.textContent = headings[index].textContent;
         const top = links[index].offsetTop - elChapters.offsetTop;
 
         if (top < elChapters.scrollTop || top + links[index].offsetHeight > elChapters.scrollTop + elChapters.clientHeight)
             elChapters.scrollTop = top - elChapters.clientHeight / 2;
     }
-
-    const headings = [...elLore.querySelectorAll("h3")];
 
     function updateActiveChapter() {
         let index = 0;
