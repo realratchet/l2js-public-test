@@ -15,20 +15,30 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rsync -a --exclude /.git --exclude /.github --exclude /.gitignore --exclude /README.md --exclude /build ./ "$RUNNER_TEMP/site/"
+      - uses: actions/configure-pages@v5
+      # Named per attempt so a re-run does not find the earlier attempt's artifact too.
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site
+          name: github-pages-${{ github.run_attempt }}
+
+  # A separate job, so the artifact is listed by the time deploy-pages looks it up.
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - run: rsync -a --exclude /.git --exclude /.github --exclude /.gitignore --exclude /README.md --exclude /build ./ "$RUNNER_TEMP/site/"
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: ${{ runner.temp }}/site
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
       - name: Purge Cloudflare cache
         env:
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
