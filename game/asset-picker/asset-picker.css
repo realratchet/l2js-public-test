@@ -166,6 +166,8 @@ html body > dialog.hosted-asset-notice {
     background-color: #111117;
 }
 
+html body > dialog.hosted-asset-notice::backdrop { background: #000a; }
+html body > dialog.hosted-asset-notice p { margin: 0 0 16px; }
 html body > dialog.hosted-asset-notice a { margin: 4px; }
 
 @media (max-width: 460px) {
