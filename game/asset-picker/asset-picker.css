@@ -1,0 +1,179 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&family=Noto+Serif+KR:wght@400;600&display=swap");
+
+html body > viewport.asset-source,
+html body > dialog.hosted-asset-notice {
+    --gold: #d8c08a;
+    --gold-dim: #8f7b4f;
+    --ink: #e9e4d8;
+    --panel: rgba(10, 12, 18, 0.62);
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans", Arial, sans-serif;
+
+    color: var(--ink);
+    font: 14px/1.65 var(--sans);
+    text-align: center;
+}
+
+html body > viewport.asset-source {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: safe center;
+    gap: clamp(12px, 3vh, 24px);
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 24px 16px 32px;
+    background:
+        radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(0, 0, 0, 0.75) 100%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.23) 38%, rgba(0, 0, 0, 0.82)),
+        #0a0c12 url("landscape-concept.jpg") center / cover no-repeat;
+}
+
+html body > viewport.asset-source::before {
+    content: "";
+    flex: none;
+    width: min(340px, 68vw, 42vh);
+    aspect-ratio: 5 / 4;
+    background: url("logo.png") center / contain no-repeat;
+    filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.8));
+}
+
+html body > viewport.asset-source > main,
+html body > dialog.hosted-asset-notice {
+    box-sizing: border-box;
+    width: min(720px, 100%);
+    padding: clamp(18px, 4vw, 40px);
+    border: 1px solid rgba(216, 192, 138, 0.35);
+    background: var(--panel);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(0, 0, 0, 0.6), 0 12px 40px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+}
+
+html body > viewport.asset-source > main {
+    position: relative;
+    flex: none;
+}
+
+html body > viewport.asset-source > main::before,
+html body > viewport.asset-source > main::after,
+html body > dialog.hosted-asset-notice::before,
+html body > dialog.hosted-asset-notice::after {
+    content: "";
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    pointer-events: none;
+}
+
+html body > viewport.asset-source > main::before,
+html body > dialog.hosted-asset-notice::before { top: 0; }
+
+html body > viewport.asset-source > main::after,
+html body > dialog.hosted-asset-notice::after { bottom: 0; }
+
+html body > viewport.asset-source h1 {
+    margin: 0 0 12px;
+    font: 400 clamp(16px, 3vw, 20px)/1.5 var(--serif);
+    color: var(--gold);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+}
+
+html body > viewport.asset-source p { margin: 0 auto 12px; }
+
+html body > viewport.asset-source > main > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: min(100%, 540px);
+    margin: 20px auto 0;
+}
+
+html body > viewport.asset-source :is(button, a),
+html body > dialog.hosted-asset-notice a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: 44px;
+    margin: 0;
+    padding: 10px 16px;
+    border: 1px solid var(--gold-dim);
+    border-radius: 0;
+    color: var(--ink);
+    background: linear-gradient(to bottom, rgba(58, 52, 40, 0.92), rgba(22, 20, 16, 0.92));
+    box-shadow: inset 0 1px 0 rgba(255, 240, 200, 0.12), 0 4px 14px rgba(0, 0, 0, 0.6);
+    font: 600 13px/1.5 var(--serif);
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+}
+
+html body > viewport.asset-source :is(.choose, .continue) {
+    grid-column: 1 / -1;
+    min-height: 68px;
+    border-color: var(--gold);
+    color: #fff6dc;
+    font-size: 15px;
+}
+
+html body > viewport.asset-source .client-download:last-child {
+    grid-column: 1 / -1;
+}
+
+html body > viewport.asset-source .client-download::before,
+html body > dialog.hosted-asset-notice a[href^="magnet:"]::before {
+    content: "";
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-inline-end: 8px;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M6 3v9a6 6 0 0 0 12 0V3h-4v9a2 2 0 0 1-4 0V3Z M6 7h4m4 0h4'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+html body > viewport.asset-source :is(button, a):is(:hover, :focus-visible),
+html body > dialog.hosted-asset-notice a:is(:hover, :focus-visible) {
+    border-color: var(--gold);
+    color: #fff6dc;
+    box-shadow: inset 0 1px 0 rgba(255, 240, 200, 0.2), 0 0 16px rgba(216, 192, 138, 0.25);
+}
+
+html body > viewport.asset-source button:disabled { opacity: 0.55; }
+
+html body > viewport.asset-source pre {
+    margin: 12px 0 0;
+    border-left-color: var(--gold-dim);
+    color: var(--gold);
+    background: #211b13;
+    font: inherit;
+    overflow-wrap: anywhere;
+}
+
+html body > viewport.asset-source pre:empty {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html body > dialog.hosted-asset-notice {
+    width: min(480px, calc(100% - 32px));
+    background-color: #111117;
+}
+
+html body > dialog.hosted-asset-notice a { margin: 4px; }
+
+@media (max-width: 460px) {
+    html body > viewport.asset-source::before {
+        width: min(230px, 60vw, 23vh);
+    }
+
+    html body > viewport.asset-source > main > div {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
